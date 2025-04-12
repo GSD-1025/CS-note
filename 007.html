@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007</title>
+</head>
+<style>
+    #order_info{
+        color: blue;
+    }
+    #orderList{
+        border: 1px solid;
+    }
+</style>
+<body>
+    <h1>주문메뉴</h1>
+    <div id="info"></div>
+    <br>
+    메뉴선택<input type="text" id="inputMenu">
+    수량<input type="text" id="inputMenuQuantity">
+    <input type="button" id="btn" onclick="order()" value="주문">
+    <br>
+    <br>
+    주문정보 <div id="order_info">
+    <hr>
+    <table id="orderList">
+        <tr>
+            <th>
+                <input type="checkbox" name="all" class="all" onclick="selectAll(this)">
+            </th>
+            <th>
+                메뉴
+            </th>
+            <th>
+                수량
+            </th>
+        </tr>
+    </table>
+    </div>
+    <br>
+    <button id="deleteBtn" onclick="del()">삭제</button>
+</body>
+<script>
+    var menu=['자장면','탕수육','볶음밥'];
+    var info=document.getElementById('info');
+
+    for(x in menu){
+        var sp1=document.createElement('span');
+        sp1.value=menu[x];
+        sp1.innerHTML=menu[x]+' ';
+        info.appendChild(sp1);
+    }
+
+    function selectAll(selectAll){
+        const checkboxes =document.getElementsByName('oList');
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked=selectAll.checked;
+        });
+    }
+
+    function order(){
+        var inmenu=document.getElementById('inputMenu').value;
+        var quant=document.getElementById('inputMenuQuantity').value;
+        var odlist=document.getElementById('orderList')
+        let dpl=0;
+        for(var i=0 ; i<3; i++){
+            if(menu[i]==inmenu){
+                dpl++;
+            }
+        }
+        if(dpl==0){
+            alert('입력된 메뉴는 없는 메뉴입니다');
+        }else{
+            var a=confirm(inmenu+' '+quant+'개 주문하시겠습니까?')
+            if(a){
+              /*
+              document.getElementById('inputMenu').value=null;
+              document.getElementById('inputMenuQuantity').value=null;*/
+              const newRow0 = odlist.insertRow();
+              const newCell0 = newRow0.insertCell();
+              const newCell1 = newRow0.insertCell();
+              const newCell2 = newRow0.insertCell();
+              newCell0.innerHTML='<input type="checkbox" name="oList" class="oList" onclick="selectone()">';
+              newCell1.innerHTML=inmenu;
+              newCell2.innerHTML=quant;
+            }
+        }
+    }
+    function del(){
+        var odlist=document.getElementById('orderList');
+        var checkboxes=document.getElementsByName('oList');
+        for(var i=0; i<checkboxes.length; i++){
+            if(checkboxes[i].checked){
+                odlist.deleteRow(i+1);
+                console.log(i);
+                i--; 
+            }
+        }
+    }
+    function selectone(){
+        const checkboxes = document.querySelectorAll('input[name="oList"]');
+        const check = document.querySelectorAll('input[name="oList"]:checked');
+        const checkall=document.querySelector('input[name="all"]')
+        if(checkboxes.length==check.length){
+            checkall.checked=true;
+        }else{
+            checkall.checked=false;;
+        }
+    }
+</script>
+
+
+</html>

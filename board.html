@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    th{
+        border-bottom: 1px solid;
+    }
+    #content{
+       margin-top: 40px; 
+    }
+    #t1{
+        width: 1100px;
+        margin: auto;
+    }
+    #do_s{
+        width: 250px;
+    }
+    #city_s{
+        width: 230px;
+    }
+    #graph_show{
+        border: 1px solid;
+    }
+    #t2{
+        margin: auto;
+        width: 1050px;
+        border-collapse: collapse;
+    }
+    #t2r2{
+        text-align: center;
+        font-size: 20px;
+    }
+    .il{
+        text-align: center;
+        border-bottom: 1px solid;
+        padding: 5px;
+    }
+    
+    
+</style>
+<body>
+    <div id="header">
+        <h1 style="text-align: center;">숙소 검색 시스템</h1>
+    </div>
+    <hr>
+    <div id="content">
+        <form action="" method="get">
+            <table id="t1">
+                <tr>
+                    <td id="do_s">
+                        <span>도선택</span>
+                        <select name="do" id="do" onchange="dos(this)">
+                            <option>----선택----</option>
+                            <option value="a">경기도</option>
+                            <option value="b">충청도</option>
+                        </select>
+                    </td>
+                    <td id="city_s">
+                        <span>시선택</span>
+                        <select name="city" id="city">
+                        <option>----선택----</option>
+                        </select>
+                    </td>
+                    <td id="all_s">
+                        <input type="radio" name="all" id="all" value="전체검색"><span>전체검색</span>
+                    </td>
+                    <td id="spe_s">
+                        <input type="radio" name="hotel" id="hotel" value="호텔"><span>호텔</span>
+                        <input type="radio" name="pension" id="pension" value="펜션"><span>펜션</span>
+                        <input type="radio" name="campsite" id="campsite" value="캠핑장"><span>캠핑장</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" id="search">
+                        <span>검색어</span>
+                        <input type="search" name="search" id="search_box" size="44px">
+                    </td>
+                    <td id="date_start">
+                        <span>등록날짜시작</span>
+                        <input type="date" name="ds" id="datest" max="2025-12-31" min="2025-01-01" onchange="datetypecheck(this)">
+                    </td>
+                    <td>
+                        <span>등록날짜종료</span>
+                        <input type="date" name="ds" id="dateen" max="2025-12-31" min="2025-01-01" onchange="datetypecheck(this)">
+                    </td>
+                    <td>
+                        <input type="button" value="조회" id="check" onclick="chk()" style="float: right;">
+                        
+                    </td>
+                </tr>
+                <tr style="height: 5px;"></tr>
+                <tr>
+                    <td colspan="5" id="graph_show">
+                        <table id="t2">
+                            <tr style="height: 20px;"></tr>
+                            <tr>
+                            <td colspan="6">
+                                <input type="checkbox">
+                                <span>전체검색</span>
+                            </td>
+                            <tr style="height: 10px;"></tr>
+                            </tr>
+                            <tr id="t2r2">
+                                <th></th>
+                                <th><span>구분</span></th>
+                                <th><span>상호명</span></th>
+                                <th><span>주소</span></th>
+                                <th><span>전화번호</span></th>
+                                <th><span>담당자</span></th>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid;"><input type="checkbox"></td>
+                                <td class="il"><span>호텔</span></td>
+                                <td class="il"><span>휴먼호텔</span></td>
+                                <td class="il"><span>경기도 수원시 휴먼동</span></td>
+                                <td class="il"><span>010-1111-2222</span></td>
+                                <td class="il"><span>홍길동</span></td>
+                            </tr>
+                            <tr style="height: 45px;">
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" id="last">
+                        <br>
+                        <input type="button" value="액셀변환" onclick="ecxel()" style="float: right;">
+                        <span style="float: right;">&nbsp;&nbsp;</span>
+                        <input type="button" value="삭제" onclick="del()" style="float: right;">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+    function dos(e){
+        var gyeonggi=['----선택----','수원시','화성시','용인시','성남시','고양시'];
+        var ChungcheongN=['----선택----','청주시','충주시','제천시'];
+        var target=document.getElementById('city');
+        if(e.value=='a'){
+            var sel_do=gyeonggi;
+        }else if(e.value=='b'){
+            var sel_do=ChungcheongN;
+        }
+        target.options.length=0;
+        for(x in sel_do){
+            var opt=document.createElement("option");
+            opt.value= sel_do[x];
+            opt.innerHTML=sel_do[x];
+            target.appendChild(opt);
+        }
+    }
+    function chk(){
+        dst=document.getElementById('datest').value;
+        ded=document.getElementById('dateen').value;
+        if(dst==''){
+            alert('시작날짜가 입력되지 않았습니다');
+        }
+        if(dst>=ded){
+            alert('시작날짜가 너무 큽니다');
+        }
+    }
+    function datetypecheck(ee){
+        e=ee.value;
+        if(e ==''){
+            alert('날짜를 입력하세요');
+            return;
+        }
+        var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
+        var a = regex.test(e);
+        if(!a){
+            alert('날짜 양식이 잘못되었습니다');
+            ee.value='';
+            return;
+        }
+    }
+</script>
